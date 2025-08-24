@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DesignNest — Admin Dashboard</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="admin-body">
+
+  <!-- Login Gate -->
+  <div id="login-screen" class="login-wrap">
+    <div class="login-card">
+      <h2>Admin Login</h2>
+      <input type="password" id="admin-pass" placeholder="Enter Admin Password" />
+      <button class="btn" id="login-btn">Login</button>
+      <p id="login-msg" class="muted" style="color:#ff7b7b;margin-top:8px;"></p>
+    </div>
+  </div>
+
+  <!-- Dashboard -->
+  <div id="dashboard" class="dash-wrap" style="display:none;">
+    <aside class="dash-sidebar">
+      <div class="dash-brand"><span class="logo small"></span> <span>DesignNest</span></div>
+      <nav class="dash-nav">
+        <button data-tab="tab-overview" class="active">Overview</button>
+        <button data-tab="tab-hero">Hero</button>
+        <button data-tab="tab-services">Services</button>
+        <button data-tab="tab-portfolio">Portfolio</button>
+        <button data-tab="tab-pricing">Pricing</button>
+        <button data-tab="tab-messages">Messages</button>
+        <button data-tab="tab-settings">Settings</button>
+      </nav>
+    </aside>
+
+    <main class="dash-main">
+      <header class="dash-topbar">
+        <div class="stats">
+          <div class="stat-card"><div class="stat-k">Services</div><div id="k-services" class="stat-v">0</div></div>
+          <div class="stat-card"><div class="stat-k">Projects</div><div id="k-projects" class="stat-v">0</div></div>
+          <div class="stat-card"><div class="stat-k">Plans</div><div id="k-plans" class="stat-v">0</div></div>
+          <div class="stat-card"><div class="stat-k">Messages</div><div id="k-messages" class="stat-v">0</div></div>
+        </div>
+        <div>
+          <a class="btn secondary" href="index.html" target="_blank" rel="noopener">View Site ↗</a>
+        </div>
+      </header>
+
+      <!-- Tabs -->
+      <section id="tab-overview" class="tab-panel active">
+        <h2>Overview</h2>
+        <p class="muted">Quick glance at your site content. Use left menu to manage.</p>
+        <div class="grid-2">
+          <div class="panel">
+            <h3>Hero</h3>
+            <p id="ov-hero-title" class="muted"></p>
+            <p id="ov-hero-desc" class="muted"></p>
+          </div>
+          <div class="panel">
+            <h3>Recent Messages</h3>
+            <div id="ov-recent-msgs" class="list"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="tab-hero" class="tab-panel">
+        <h2>Hero Section</h2>
+        <div class="panel">
+          <label>Title</label>
+          <input type="text" id="hero-title-input" placeholder="Hero Title" />
+          <label>Description</label>
+          <textarea id="hero-text-input" placeholder="Hero Description"></textarea>
+          <button class="btn" id="save-hero">Save Hero</button>
+        </div>
+      </section>
+
+      <section id="tab-services" class="tab-panel">
+        <h2>Services</h2>
+        <div class="panel">
+          <div class="grid-2">
+            <div>
+              <label>Title</label>
+              <input type="text" id="svc-title" placeholder="e.g., ⚡ Web Design" />
+              <label>Description</label>
+              <textarea id="svc-desc" placeholder="Short description"></textarea>
+              <button class="btn" id="svc-add">Add Service</button>
+            </div>
+            <div>
+              <h3 style="margin-bottom:10px;">Existing</h3>
+              <div id="svc-list" class="list"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="tab-portfolio" class="tab-panel">
+        <h2>Portfolio</h2>
+        <div class="panel">
+          <div class="grid-2">
+            <div>
+              <label>Project Name</label>
+              <input type="text" id="pf-name" placeholder="Project Name" />
+              <label>Project Link</label>
+              <input type="url" id="pf-link" placeholder="https://example.com" />
+              <label>Category</label>
+              <input type="text" id="pf-category" placeholder="e.g., E-commerce / Startup" />
+              <label>Thumbnail (upload)</label>
+              <input type="file" id="pf-thumb" accept="image/*" />
+              <button class="btn" id="pf-add">Add Project</button>
+              <input type="hidden" id="pf-edit-index" value="-1" />
+            </div>
+            <div>
+              <h3 style="margin-bottom:10px;">Existing Projects</h3>
+              <div id="pf-list" class="cards"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="tab-pricing" class="tab-panel">
+        <h2>Pricing</h2>
+        <div class="panel">
+          <div class="grid-2">
+            <div>
+              <label>Plan Name</label>
+              <input type="text" id="pr-name" placeholder="Basic / Pro / Enterprise" />
+              <label>Price</label>
+              <input type="text" id="pr-price" placeholder="$199" />
+              <label>Description</label>
+              <textarea id="pr-desc" placeholder="Short description"></textarea>
+              <button class="btn" id="pr-add">Add Plan</button>
+              <input type="hidden" id="pr-edit-index" value="-1" />
+            </div>
+            <div>
+              <h3 style="margin-bottom:10px;">Existing Plans</h3>
+              <div id="pr-list" class="list"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="tab-messages" class="tab-panel">
+        <h2>Contact Messages</h2>
+        <div class="panel">
+          <div id="msg-list" class="table">
+            <!-- Filled by JS -->
+          </div>
+        </div>
+      </section>
+
+      <section id="tab-settings" class="tab-panel">
+        <h2>Settings</h2>
+        <div class="panel">
+          <label>Admin Password</label>
+          <input type="password" id="set-pass" placeholder="New password" />
+          <button class="btn" id="set-pass-save">Update Password</button>
+          <hr style="margin:20px 0;border-color:rgba(255,255,255,.1)">
+          <button class="btn danger" id="set-reset">Reset All Content (Factory)</button>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>
